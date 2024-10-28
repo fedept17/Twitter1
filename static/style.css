@@ -1,0 +1,155 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f4f4;
+    height: 100vh;
+}
+
+.container {
+    width: 80%;
+    max-width: 1000px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+
+.header {
+    background-color: #666;
+    padding: 10px;
+    color: white;
+    text-align: center;
+    position: relative;
+}
+
+.header h1 {
+    font-size: 24px;
+}
+
+.emergency-call {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-weight: bold;
+    color: red;
+}
+
+.emergency-number {
+    color: #d22;
+    font-size: 1.2em;
+}
+
+.content {
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+}
+
+.notifications, .location-alerts, .nationwide-alerts {
+    flex: 1;
+    padding: 10px;
+}
+
+.notifications h2, .location-alerts h3, .nationwide-alerts h3 {
+    margin-bottom: 10px;
+}
+
+.notifications label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.notifications input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.notifications button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btn {
+    flex: 1;
+    padding: 8px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.pie-chart {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: conic-gradient(
+        red 0 33%,
+        blue 33% 66%,
+        green 66% 100%
+    );
+    margin: 20px auto;
+    position: relative;
+}
+
+.slice {
+    position: absolute;
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.fire {
+    top: 20%;
+    left: 60%;
+}
+
+.police {
+    top: 60%;
+    left: 10%;
+}
+
+.medic {
+    top: 60%;
+    right: 10%;
+}
+
+.location-alerts input, .nationwide-alerts input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+body {
+    background-color: lightgray;
+}

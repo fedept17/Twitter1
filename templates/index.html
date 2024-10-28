@@ -1,0 +1,29 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NECA Dashboard</title>
+    <script>
+        async function fetchDashboardData() {
+            const response = await fetch("/data");
+            const data = await response.json();
+            document.getElementById("sports").innerText = data.sports;
+            document.getElementById("weather").innerText = data.weather;
+            document.getElementById("alerts").innerText = data.alerts;
+        }
+
+        // Refresh data every 2 seconds
+        setInterval(fetchDashboardData, 2000);
+    </script>
+</head>
+<body>
+    <h1>NECA Dashboard</h1>
+    <h2>Sports:</h2>
+    <p id="sports">Loading...</p>
+    <h2>Weather:</h2>
+    <p id="weather">Loading...</p>
+    <h2>Alerts:</h2>
+    <p id="alerts">Loading...</p>
+</body>
+</html>
