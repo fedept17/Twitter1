@@ -8,9 +8,9 @@ app = Flask(__name__)
 
 # Dashboard data (simulated for this example)
 dashboard_data = {
-    "sports": "No updates yet.",
-    "weather": "No updates yet.",
-    "alerts": "No alerts."
+    "sports": "Manuela the cindarella.",
+    "weather": "Cleo the piopio.",
+    "alerts": "Kashyp the thick."
 }
 
 # Event to update sports data
