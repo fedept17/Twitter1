@@ -42,13 +42,13 @@ def get_data():
     return jsonify(dashboard_data)
 
 # Background function to simulate event firing
-def simulate_events():
-    time.sleep(2)
-    fire_global(event_name="update_sports", data="Live game score: 2-1", delay=1)
-    fire_global(event_name="update_weather", data="Clear skies with a chance of rain", delay=3)
-    fire_global(event_name="update_alerts", data="Security alert in your area", delay=5)
+# def simulate_events():
+#     time.sleep(2)
+#     fire_global(event_name="update_sports", data="Live game score: 2-1", delay=1)
+#     fire_global(event_name="update_weather", data="Clear skies with a chance of rain", delay=3)
+#     fire_global(event_name="update_alerts", data="Security alert in your area", delay=5)
 
 if __name__ == "__main__":
     # Start the event simulation in a separate thread
-    threading.Thread(target=simulate_events).start()
+    # threading.Thread(target=simulate_events).start()
     app.run(debug=True,port=5003)
