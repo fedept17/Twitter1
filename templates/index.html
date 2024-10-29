@@ -1,29 +1,118 @@
-<!-- templates/index.html -->
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>NECA Dashboard</title>
-    <script>
-        async function fetchDashboardData() {
-            const response = await fetch("/data");
-            const data = await response.json();
-            document.getElementById("sports").innerText = data.sports;
-            document.getElementById("weather").innerText = data.weather;
-            document.getElementById("alerts").innerText = data.alerts;
-        }
+<html>
+  <head>
+    <title>Incident Hub</title>
 
-        // Refresh data every 2 seconds
-        setInterval(fetchDashboardData, 2000);
+    <script>
+      // this prevents the page from being opened as a file
+      if (window.location.protocol === "file:") {
+        alert("Please open this file from the server");
+        window.location = "http://localhost:3000/";
+      }
     </script>
-</head>
-<body>
-    <h1>NECA Dashboard</h1>
-    <h2>Sports:</h2>
-    <p id="sports">Loading...</p>
-    <h2>Weather:</h2>
-    <p id="weather">Loading...</p>
-    <h2>Alerts:</h2>
-    <p id="alerts">Loading...</p>
-</body>
+
+    <script src="/static/lib/socket.io.js"></script>
+    <script src="/static/lib/core.js"></script>
+    <script src="/static/lib/chart.js"></script>
+    <script src="/static/lib/piechart.js"></script>
+    <script src="/static/lib/chart.js"></script>
+    <script src="/static/lib/linechart.js"></script>
+    <script src="/static/lib/form.js"></script>
+
+
+  </head>
+
+<!--form-->
+  <form id="myForm">
+    <h2> Real Time Notifications</h2>
+      <div>
+          <label for="email_address">Email Address:</label>
+          <input type="email" id="email_address" name="email" required>
+      </div>
+
+      <div>
+          <label for="location">Location:</label>
+          <input type="text" id="location" name="location" required >
+      </div>
+
+
+      <input type="submit" value="Send Me Notifications">
+  </form>
+
+  <script>
+      form("myForm", {target: "/api/form", callback: function(){}});
+  </script>
+
+
+<!--  pie chart-->
+  <body>
+    <div style="height: 400px; overflow hidden">
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <script>
+        let chart = piechart('myChart', {
+            data: {
+                labels: ['Brandweer', 'Politie', 'Ambulance', 'Other'],
+                datasets: [{
+                    label: 'Number of Calls',
+                    data: [0, 0, 0, 0],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(128, 128, 128, 0.2)'
+
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(128, 128, 128, 1)'
+
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+            }
+        });
+
+        connect_block(chart, "piecharts")
+    </script>
+
+
+<!--&lt;!&ndash;  line chart&ndash;&gt;-->
+
+<!--  <script>-->
+<!--    let chart = linechart('myChart', {-->
+<!--        data: {-->
+<!--            labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],-->
+<!--            datasets: [{-->
+<!--                label: 'My First Dataset',-->
+<!--                data: [12, 19, 3, 5, 2, 3],-->
+<!--                backgroundColor: [-->
+<!--                    'rgba(255, 99, 132, 0.2)',-->
+<!--                ],-->
+<!--                borderColor: [-->
+<!--                    'rgba(255, 99, 132, 1)',-->
+<!--                ],-->
+<!--                borderWidth: 1-->
+<!--            }]-->
+<!--        },-->
+<!--        options: {-->
+<!--            scales: {-->
+<!--                y: {-->
+<!--                    beginAtZero: true-->
+<!--                }-->
+<!--            },-->
+<!--            responsive: true,-->
+<!--        }-->
+<!--    });-->
+
+<!--    connect_block(chart, 'linechart')-->
+<!--  </script>-->
+  </body>
+
 </html>
