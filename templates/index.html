@@ -1,29 +1,61 @@
-<!-- templates/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>NECA Dashboard</title>
-    <script>
-        async function fetchDashboardData() {
-            const response = await fetch("/data");
-            const data = await response.json();
-            document.getElementById("sports").innerText = data.sports;
-            document.getElementById("weather").innerText = data.weather;
-            document.getElementById("alerts").innerText = data.alerts;
-        }
-
-        // Refresh data every 2 seconds
-        setInterval(fetchDashboardData, 2000);
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incident Hub</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../static/style.css">
 </head>
 <body>
-    <h1>NECA Dashboard</h1>
-    <h2>Sports:</h2>
-    <p id="sports">Loading...</p>
-    <h2>Weather:</h2>
-    <p id="weather">Loading...</p>
-    <h2>Alerts:</h2>
-    <p id="alerts">Loading...</p>
+    <div class="container">
+        <header class="header">
+            <h1>Incident Hub</h1>
+            <div class="emergency-call">IN CASE OF EMERGENCY CALL <span class="emergency-number">112</span></div>
+        </header>
+        
+        <div class="content">
+            <section class="notifications">
+                <h2>Real-Time Notifications</h2>
+                <h2>Latest tweet:</h2>
+                <p id="tweet">Loading...</p>
+                <label for="email">E-mail</label>
+                <input type="email" id="email" placeholder="Value">
+                <label for="location">Location</label>
+                <input type="text" id="location" placeholder="Value">
+                <button>Send Me Notifications</button>
+                
+                <div class="buttons">
+                    <button class="btn">Nationwide</button>
+                    <button class="btn">City</button>
+                </div>
+                
+                <div class="pie-chart">
+                    <div class="slice fire">Fire</div>
+                    <div class="slice police">Police</div>
+                    <div class="slice medic">Medic</div>
+                </div>
+            </section>
+            
+            <section class="location-alerts">
+                <h3>Location</h3>
+                <input type="text" placeholder="City">
+                <input type="text" placeholder="Alerts">
+            </section>
+            
+            <section class="nationwide-alerts">
+                <h3>Nationwide</h3>
+                <input type="text" placeholder="Alerts">
+            </section>
+        </div>
+    </div>
 </body>
+<script type="text/javascript" charset="utf-8">
+    let socket = io();
+    let tweetElem =  document.getElementById("tweet");
+    socket.on('new_tweet', function(data) {
+        tweetElem.innerText = JSON.stringify(data);
+    });
+</script>
 </html>
+
