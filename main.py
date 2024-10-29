@@ -39,7 +39,7 @@ def send_email(receiver_email, data):
             connection.login(user=gmail, password=password)  # Log in with your email and password
 
             subject = "[ALERT]"
-            message = data['description']
+            message = f"{data['description']}\n{data['related_messages']}"
             full_message = f"Subject: {subject}\n\n{message}"
 
             connection.sendmail(
