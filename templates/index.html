@@ -1,61 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+  <head>
     <title>Incident Hub</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../static/style.css">
-</head>
-<body>
-    <div class="container">
-        <header class="header">
-            <h1>Incident Hub</h1>
-            <div class="emergency-call">IN CASE OF EMERGENCY CALL <span class="emergency-number">112</span></div>
-        </header>
-        
-        <div class="content">
-            <section class="notifications">
-                <h2>Real-Time Notifications</h2>
-                <h2>Latest tweet:</h2>
-                <p id="tweet">Loading...</p>
-                <label for="email">E-mail</label>
-                <input type="email" id="email" placeholder="Value">
-                <label for="location">Location</label>
-                <input type="text" id="location" placeholder="Value">
-                <button>Send Me Notifications</button>
-                
-                <div class="buttons">
-                    <button class="btn">Nationwide</button>
-                    <button class="btn">City</button>
-                </div>
-                
-                <div class="pie-chart">
-                    <div class="slice fire">Fire</div>
-                    <div class="slice police">Police</div>
-                    <div class="slice medic">Medic</div>
-                </div>
-            </section>
-            
-            <section class="location-alerts">
-                <h3>Location</h3>
-                <input type="text" placeholder="City">
-                <input type="text" placeholder="Alerts">
-            </section>
-            
-            <section class="nationwide-alerts">
-                <h3>Nationwide</h3>
-                <input type="text" placeholder="Alerts">
-            </section>
-        </div>
-    </div>
-</body>
-<script type="text/javascript" charset="utf-8">
-    let socket = io();
-    let tweetElem =  document.getElementById("tweet");
-    socket.on('new_tweet', function(data) {
-        tweetElem.innerText = JSON.stringify(data);
-    });
-</script>
-</html>
 
+    <script>
+      // this prevents the page from being opened as a file
+      if (window.location.protocol === "file:") {
+        alert("Please open this file from the server");
+        window.location = "http://localhost:3000/";
+      }
+    </script>
+
+    <script src="/static/lib/socket.io.js"></script>
+    <script src="/static/lib/core.js"></script>
+    <script src="/static/lib/chart.js"></script>
+    <script src="/static/lib/piechart.js"></script>
+    <script src="/static/lib/chart.js"></script>
+    <script src="/static/lib/linechart.js"></script>
+    <script src="/static/lib/form.js"></script>
+
+
+  </head>
+
+<!--form-->
+  <form id="myForm">
+    <h2> Real Time Notifications</h2>
+      <div>
+          <label for="email_address">Email Address:</label>
+          <input type="email" id="email_address" name="email" required>
+      </div>
+
+      <div>
+          <label for="location">Location:</label>
+          <input type="text" id="location" name="location" required >
+      </div>
+
+
+      <input type="submit" value="Send Me Notifications">
+  </form>
+
+  <script>
+      form("myForm", {target: "/api/form", callback: function(){}});
+  </script>
+
+
+<!--  pie chart-->
+  <body>
+    <div style="height: 400px; overflow hidden">
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <script>
+        let chart = piechart('myChart', {
+            data: {
+                labels: ['Brandweer', 'Politie', 'Ambulance', 'Other'],
+                datasets: [{
+                    label: 'Number of Calls',
+                    data: [0, 0, 0, 0],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(128, 128, 128, 0.2)'
+
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(128, 128, 128, 1)'
+
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+            }
+        });
+
+        connect_block(chart, "piecharts")
+    </script>
+
+
+<!--&lt;!&ndash;  line chart&ndash;&gt;-->
+
+<!--  <script>-->
+<!--    let chart = linechart('myChart', {-->
+<!--        data: {-->
+<!--            labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],-->
+<!--            datasets: [{-->
+<!--                label: 'My First Dataset',-->
+<!--                data: [12, 19, 3, 5, 2, 3],-->
+<!--                backgroundColor: [-->
+<!--                    'rgba(255, 99, 132, 0.2)',-->
+<!--                ],-->
+<!--                borderColor: [-->
+<!--                    'rgba(255, 99, 132, 1)',-->
+<!--                ],-->
+<!--                borderWidth: 1-->
+<!--            }]-->
+<!--        },-->
+<!--        options: {-->
+<!--            scales: {-->
+<!--                y: {-->
+<!--                    beginAtZero: true-->
+<!--                }-->
+<!--            },-->
+<!--            responsive: true,-->
+<!--        }-->
+<!--    });-->
+
+<!--    connect_block(chart, 'linechart')-->
+<!--  </script>-->
+  </body>
+
+</html>
