@@ -23,7 +23,6 @@ generate_data('p2000_incidents.json',
               event_name='tweet',
               limit=1000)
 
-
 def send_email(user_data):
     receiver_email = user_data['email']
     try:

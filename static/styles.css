@@ -1,7 +1,3 @@
-Add files via upload
-34b52d2
-style.css
-@@ -0,0 +1,155 @@
 * {
     box-sizing: border-box;
     margin: 0;
@@ -15,6 +11,11 @@ body {
     align-items: center;
     background-color: #f4f4f4;
     height: 100vh;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
