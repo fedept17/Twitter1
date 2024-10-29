@@ -67,12 +67,14 @@ password = "mikv iudj fwqh dobp" # app password
 # real = 'utwenteproject2024!'
 
 @app.route("/filter", methods=["POST"])
-def filter():
+def filter(data):
     filter_priorities = request.json
     print('received json: ' + str(filter_priorities))
 
-    # process data
-    emit("location", "data")
+    #Need of the function to identify priority to filter only the ones with the input priority
+    filtered_data = [entry for entry in data if entry["priority"] in filter_priorities]
+    
+    socketio.emit("location", {"data": filtered_data})
 
 @app.route("/api/form", methods=["POST"])
 def form():
