@@ -5,7 +5,12 @@ from neca.settings import app, socket
 from flask import Flask, request
 import smtplib
 
+import socketio
+
 send_email_user = {}
+selected_location = ""
+selected_priorities = {}
+tweets = []
 
 #pie chart
 def add_data_pie_chart(data):
@@ -17,6 +22,8 @@ def add_data_pie_chart(data):
 
 @event("tweet")
 def tweet_event(context, data):
+    tweets.append(data)
+    emit("nationwide", data)
     add_data_pie_chart(data)
     
 generate_data('p2000_incidents.json',
@@ -51,6 +58,14 @@ def send_email(user_data):
 gmail = "incidenthubweek9@gmail.com"
 password = "mikv iudj fwqh dobp" # app password
 # real = 'utwenteproject2024!'
+
+@app.route("/filter", methods=["POST"])
+def filter():
+    filter_priorities = request.json
+    print('received json: ' + str(filter_priorities))
+
+    # process data
+    emit("location", "data")
 
 @app.route("/api/form", methods=["POST"])
 def form():
