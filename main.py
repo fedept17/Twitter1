@@ -5,7 +5,7 @@ from neca.settings import app, socket
 from flask import Flask, request
 import smtplib
 
-# your code here
+send_email_user = {}
 
 #pie chart
 def add_data_pie_chart(data):
@@ -13,6 +13,7 @@ def add_data_pie_chart(data):
         emit("piecharts", {"action": "add","value": [f"{data['service']}", 1]})
     else:
         emit("piecharts", {"action": "add","value": [f"Other", 1]})
+
 
 @event("tweet")
 def tweet_event(context, data):
@@ -40,7 +41,7 @@ def send_email(user_data):
                 msg=full_message
             )
             print("Email sent successfully!")
-
+            print (send_email_user)
             connection.quit()
 
     except Exception as e:
@@ -59,7 +60,9 @@ def form():
     # Convert email and location to lowercase
     email = data['email'].lower()
     location = data['location'].lower()
-
+    if location not in send_email_user:
+        send_email_user[location] = []
+    send_email_user[f'{location}'].append(email)
     # Prepare the data to be sent to the event
     lowercased_data = {'email': email, 'location': location}
 
