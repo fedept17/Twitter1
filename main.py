@@ -8,14 +8,16 @@ import smtplib
 # your code here
 
 #pie chart
-@event("tweet")
-def tweet_event(context, data):
+def add_data_pie_chart(data):
     if data['service'] in ["Brandweer", "Politie", "Ambulance"]:
         emit("piecharts", {"action": "add","value": [f"{data['service']}", 1]})
     else:
         emit("piecharts", {"action": "add","value": [f"Other", 1]})
 
-
+@event("tweet")
+def tweet_event(context, data):
+    add_data_pie_chart(data)
+    
 generate_data('p2000_incidents.json',
               time_scale=100,
               event_name='tweet',
