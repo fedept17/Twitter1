@@ -19,27 +19,34 @@ def add_data_pie_chart(data):
     else:
         emit("piecharts", {"action": "add","value": [f"Other", 1]})
 
+#send email
+def check_location_email(data):
+    if data['region'].lower() in send_email_user:
+        for email in send_email_user[data['region'].lower()]:
+            send_email(email, data)
+        
 
 @event("tweet")
 def tweet_event(context, data):
     tweets.append(data)
     emit("nationwide", data)
     add_data_pie_chart(data)
+    check_location_email(data)
+    print(data['region'])
     
 generate_data('p2000_incidents.json',
-              time_scale=100,
+              time_scale=50,
               event_name='tweet',
               limit=1000)
 
-def send_email(user_data):
-    receiver_email = user_data['email']
+def send_email(receiver_email, data):
     try:
         with smtplib.SMTP("smtp.gmail.com", port=587) as connection:
             connection.starttls()  # Start TLS for security
             connection.login(user=gmail, password=password)  # Log in with your email and password
 
             subject = "[ALERT]"
-            message = "You good?"
+            message = f"{data['description']}\n{data['related_messages']}"
             full_message = f"Subject: {subject}\n\n{message}"
 
             connection.sendmail(
@@ -80,8 +87,7 @@ def form():
     send_email_user[f'{location}'].append(email)
     # Prepare the data to be sent to the event
     lowercased_data = {'email': email, 'location': location}
-
-    send_email(lowercased_data)
+    print(send_email_user)
     # Fire the global event with the modified data
 
     return "ok", 200
