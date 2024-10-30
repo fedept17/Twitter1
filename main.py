@@ -1,3 +1,5 @@
+from crypt import methods
+
 import neca
 from neca.generators import print_object, generate_data
 from neca.events import *
@@ -11,19 +13,57 @@ import socketio
 send_email_user = {}
 selected_region = ""
 selected_priorities = {"p1", "p2", "p3", "non-priority"}
-piechart_type = "nationwide"
+current_piechart_type = "nationwide"
 tweets = []
 gmail = "incidenthubweek9@gmail.com"
 password = "mikv iudj fwqh dobp" # app password
 # real = 'utwenteproject2024!'
-5
+current_region_calls_count = {'nationwide': {"Brandweer": 0, "Politie":0, "Ambulance":0, "Other":0}}
 
 #pie chart
-def add_data_pie_chart(data):
+
+def count_calls_region(data):
+    if data['region'] not in current_region_calls_count:
+        current_region_calls_count[data['region']] = {"Brandweer": 0, "Politie":0, "Ambulance":0, "Other":0}
+
     if data['service'] in ["Brandweer", "Politie", "Ambulance"]:
-        emit("piecharts", {"action": "add","value": [f"{data['service']}", 1]})
+        current_region_calls_count[data['region']][data['service']] += 1
+        current_region_calls_count['nationwide'][data['service']] += 1
+
     else:
-        emit("piecharts", {"action": "add","value": [f"Other", 1]})
+        current_region_calls_count[data['region']]['Other'] += 1
+        current_region_calls_count['nationwide']['Other'] += 1
+
+def add_nationwide_pie_chart():
+    emit("piecharts", {"action": "set",
+                       "value": ["Brandweer", current_region_calls_count['nationwide'].get('Brandweer')]})
+    emit("piecharts",
+         {"action": "set", "value": ["Politie", current_region_calls_count['nationwide'].get('Politie')]})
+    emit("piecharts", {"action": "set",
+                       "value": ["Ambulance", current_region_calls_count['nationwide'].get('Ambulance')]})
+    emit("piecharts",
+         {"action": "set", "value": ["Other", current_region_calls_count['nationwide'].get('Other')]})
+
+def add_regional_pie_chart():
+    global selected_region
+    if selected_region not in current_region_calls_count:
+        emit("piecharts", {"action": "set",
+                           "value": ["Brandweer", 0]})
+        emit("piecharts",
+             {"action": "set", "value": ["Politie", 0]})
+        emit("piecharts", {"action": "set",
+                           "value": ["Ambulance", 0]})
+        emit("piecharts",
+             {"action": "set", "value": ["Other", 0]})
+    else:
+        emit("piecharts", {"action": "set",
+                           "value": ["Brandweer", current_region_calls_count[selected_region].get('Brandweer')]})
+        emit("piecharts",
+             {"action": "set", "value": ["Politie", current_region_calls_count[selected_region].get('Politie')]})
+        emit("piecharts", {"action": "set",
+                           "value": ["Ambulance", current_region_calls_count[selected_region].get('Ambulance')]})
+        emit("piecharts",
+             {"action": "set", "value": ["Other", current_region_calls_count[selected_region].get('Other')]})
 
 #send email
 def check_location_email(data):
@@ -75,19 +115,6 @@ def add_region_data(data):
         emit("region", data)
 
 
-# append tweets with priority
-def get_alert_priority(data):
-    if data['description'][:1] in ['1', '2', '3']:
-        tweets.append([data, data['description'][:1]])
-    elif data['description'][:2] in ['A1', 'A2', 'A3']:
-        tweets.append([data, data['description'][:2].replace("A", "")])
-    elif data['description'][:3] in ['P 1', 'P 2', 'P 3']:
-        tweets.append([data, data['description'][:3].replace("P ", "")])
-    elif data['description'][:6] in ['Prio 1', 'Prio 2', 'Prio 3']:
-        tweets.append([data, data['description'][:6].replace("Prio ", "")])
-    else:
-        tweets.append([data, "non-priority"])
-
 def extract_priority(data):
     if data['description'][:1] in ['1', '2', '3']:
         data["priority"] = "p"+data['description'][0]
@@ -104,20 +131,27 @@ def extract_priority(data):
     else:
         data["priority"] = "non-priority"
 
+
+
 @socket.on("piechart-type")
 def piechart(type):
-    # type = "nationwide" or "region"
-    # change pie chart
-    pass
+    global current_piechart_type
+    current_piechart_type = type
+
+    if current_piechart_type == "nationwide":
+        add_nationwide_pie_chart()
+    else:
+        add_regional_pie_chart()
+
+
 
 # filter priority
 @socket.on("filter")
 def filter(data):
     global selected_region, selected_priorities
+    if current_piechart_type == "region":
+        add_regional_pie_chart()
 
-    if piechart_type == "region" and data[0] != selected_region:
-        # change pie chart
-        pass
 
     selected_region, selected_priorities = data
     
@@ -129,16 +163,19 @@ def filter(data):
 @event("tweet")
 def tweet_event(context, data):
     extract_priority(data)
-
     add_nationwide_data(data)
     add_region_data(data)
-    add_data_pie_chart(data)
     check_location_email(data)
     tweets.append(data)
-    # get_alert_priority(data)
+    count_calls_region(data)
+
+    if current_piechart_type == "nationwide":
+        add_nationwide_pie_chart()
+    else:
+        add_regional_pie_chart()
 
 generate_data('p2000_incidents.json',
-              time_scale=10,
+              time_scale=3,
               event_name='tweet',
               limit=10000)
 
