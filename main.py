@@ -9,13 +9,14 @@ import socketio
 
 ## default values
 send_email_user = {}
-selected_location = ""
-selected_priorities = {}
+selected_region = ""
+selected_priorities = {"p1", "p2", "p3", "non-priority"}
+piechart_type = "nationwide"
 tweets = []
 gmail = "incidenthubweek9@gmail.com"
 password = "mikv iudj fwqh dobp" # app password
 # real = 'utwenteproject2024!'
-
+5
 
 #pie chart
 def add_data_pie_chart(data):
@@ -32,7 +33,7 @@ def check_location_email(data):
 def send_email(receiver_email, data):
     try:
         with smtplib.SMTP("smtp.gmail.com", port=587) as connection:
-            connection.starttls()  # Start TLS for security
+            connection.starttls()  # Start TLS for security5
             connection.login(user=gmail, password=password)  # Log in with your email and password
 
             subject = "[ALERT]"
@@ -69,6 +70,10 @@ def form():
 def add_nationwide_data(data):
     emit("nationwide", data)
 
+def add_region_data(data):
+    if data['region'] == selected_region and data['priority'] in selected_priorities:
+        emit("region", data)
+
 
 # append tweets with priority
 def get_alert_priority(data):
@@ -83,31 +88,59 @@ def get_alert_priority(data):
     else:
         tweets.append([data, "non-priority"])
 
+def extract_priority(data):
+    if data['description'][:1] in ['1', '2', '3']:
+        data["priority"] = "p"+data['description'][0]
+        data["description"] = data['description'][1:]
+    elif data['description'][:2].lower() in ['a1', 'a2', 'a3']:
+        data["priority"] = "p"+data['description'][1]
+        data["description"] = data['description'][2:]
+    elif data['description'][:3].lower() in ['p 1', 'p 2', 'p 3']:
+        data["priority"] = "p"+data['description'][2]
+        data["description"] = data['description'][3:]
+    elif data['description'][:6].lower() in ['prio 1', 'prio 2', 'prio 3']:
+        data["priority"] = "p"+data['description'][5]
+        data["description"] = data['description'][6:]
+    else:
+        data["priority"] = "non-priority"
+
+@socket.on("piechart-type")
+def piechart(type):
+    # type = "nationwide" or "region"
+    # change pie chart
+    pass
 
 # filter priority
-@app.route("/filter_priority", methods=["POST"])
-def filter_priority(data):
-    filter_priorities = request.json
-    print('received json: ' + str(filter_priorities))
+@socket.on("filter")
+def filter(data):
+    global selected_region, selected_priorities
 
-    #Need of the function to identify priority to filter only the ones with the input priority
-    filtered_data = [entry for entry in data if entry["priority"] in filter_priorities]
+    if piechart_type == "region" and data[0] != selected_region:
+        # change pie chart
+        pass
+
+    selected_region, selected_priorities = data
     
-    socketio.emit("location", {"data": filtered_data})
+    #Need of the function to identify priority to filter only the ones with the input priority and region
+    filtered_data = [entry for entry in tweets if (entry["priority"] in selected_priorities and entry["region"] == selected_region)]
 
-
+    emit("filtered_region", filtered_data)
 
 @event("tweet")
 def tweet_event(context, data):
+    extract_priority(data)
+
     add_nationwide_data(data)
+    add_region_data(data)
     add_data_pie_chart(data)
     check_location_email(data)
-    get_alert_priority(data)
+    tweets.append(data)
+    # get_alert_priority(data)
 
 generate_data('p2000_incidents.json',
               time_scale=10,
               event_name='tweet',
-              limit=1000)
+              limit=10000)
 
 # starts the server and prevents the program from exiting
 neca.start(port=3100)

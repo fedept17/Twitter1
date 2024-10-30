@@ -1,161 +1,148 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
+	font-family: Arial, sans-serif;
+}
+
+.alert-p2 {
+	--bs-alert-color: rgb(146, 93, 0);
+	--bs-alert-bg: rgb(226, 195, 140);
+	--bs-alert-border-color: rgba(255, 159, 64, 1);
+}
+
+.header {
+	display: flex;
+	padding: 10px;
+	justify-content: center;
+	background-color: #666;
+	color: white;
+	position: relative;
+	align-items: baseline;
+}
+
+html,
+body {
+	height: 100%;
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f4f4f4;
-    height: 100vh;
+	display: flex;
+	flex-direction: column;
 }
 
 .column {
-    display: flex;
-    flex-direction: column;
-    gap:15px;
-}
-
-
-
-.header {
-    background-color: #666;
-    padding: 10px;
-    color: white;
-    text-align: center;
-    position: relative;
-}
-
-.header h1 {
-    font-size: 24px;
-}
-
-.emergency-call {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-weight: bold;
-    color: red;
-}
-
-.emergency-number {
-    color: #d22;
-    font-size: 1.2em;
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	height: 100%;
+	overflow: hidden;
 }
 
 .content {
-    display: flex;
-    padding: 31.5px;
-    gap: 296px;
+	display: flex;
+	flex: 1;
+	gap: 10px;
+	width: 100%;
+	padding: 10px;
+	overflow: hidden;
 }
 
-.notifications, .location-alerts, .nationwide-alerts {
-    flex: 1;
-    padding: 10px;
-    
+.db-item {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	border: 1px solid #000000;
+	border-radius: 10px;
+	background-color: rgb(227, 227, 227);
+	padding: 10px;
+	overflow: hidden;
 }
 
-.notifications h2, .location-alerts h3, .nationwide-alerts h3 {
-    margin-bottom: 10px;
-    font-size: 24px;
+#nationwide, #regionwide {
+	overflow: scroll;
 }
 
-.notifications label {
-    display: block;
-    margin-top: 10px;
-    font-weight: bold;
+h1, h2, h3{
+	font-weight: bold;
+	text-align: center;
 }
 
-.notifications input {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+h2 {
+	margin-bottom: 20px;
 }
 
-.notifications button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background-color: black;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    margin-top: 15px;
-    cursor: pointer;
+hr {
+	margin: 0px;
 }
 
-.notifications button:hover {
-    background-color: grey;
-    color: black;
-  }
+.dropdown-item {
+	padding-left: 30px;
+}
+
+.emergency-call {
+	position: absolute;
+	right: 10px;
+	font-weight: bold;
+	color: red;
+}
+
+.emergency-number {
+	color: #d22;
+	font-size: 1.2em;
+}
+
+#chart {
+	margin-top: 10px;
+	flex: none;
+}
 
 .buttons {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.btn {
-    flex: 1;
-    padding: 8px;
-    background-color: black;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+	display: flex;
+	gap: 10px;
+	margin-top: 10px;
 }
 
 .pie-chart {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    background: conic-gradient(
-        red 0 33%,
-        blue 33% 66%,
-        green 66% 100%
-    );
-    margin: 20px auto;
-    position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	background: conic-gradient(red 0 33%, blue 33% 66%, green 66% 100%);
+	margin: 20px auto;
+	position: relative;
 }
 
 .slice {
-    position: absolute;
-    color: white;
-    font-weight: bold;
-    font-size: 12px;
+	position: absolute;
+	color: white;
+	font-weight: bold;
+	font-size: 12px;
 }
 
 .fire {
-    top: 20%;
-    left: 60%;
+	top: 20%;
+	left: 60%;
 }
 
 .police {
-    top: 60%;
-    left: 10%;
+	top: 60%;
+	left: 10%;
 }
 
 .medic {
-    top: 60%;
-    right: 10%;
+	top: 60%;
+	right: 10%;
 }
 
-.location-alerts input, .nationwide-alerts input {
-    width: 100%;
-    padding: 12px;
-    margin-top: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.region-alerts input,
+.nationwide-alerts input {
+	width: 100%;
+	padding: 12px;
+	margin-top: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
 }
 
 body {
-    background-color: white;
+	background-color: white;
 }
