@@ -97,7 +97,7 @@ def send_email(receiver_email, data):
 def form():
     # Extract JSON data from the request
     data = request.json
-
+    print(data)
     email = data['email'].lower()
     location = data['location'].lower()
     if location not in send_email_user:
@@ -180,4 +180,4 @@ generate_data('p2000_incidents.json',
               limit=10000)
 
 # starts the server and prevents the program from exiting
-neca.start(port=3100)
+neca.start(port=3200)
