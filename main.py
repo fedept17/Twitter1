@@ -1,16 +1,15 @@
 import neca
-from neca.generators import print_object, generate_data
+from neca.generators import generate_data
 from neca.events import *
 from neca.settings import app, socket
-from flask import Flask, request
+from flask import request
 import smtplib
-import socketio
 
 
 ## default values
 send_email_user = {}
 selected_region = ""
-selected_priorities = {"p1", "p2", "p3", "non-priority"}
+selected_priorities = {"high", "medium", "low", "non-priority"}
 current_piechart_type = "nationwide"
 tweets = []
 gmail = "incidenthubweek9@gmail.com"
@@ -19,7 +18,6 @@ password = "mikv iudj fwqh dobp" # app password
 current_region_calls_count = {'nationwide': {"Brandweer": 0, "Politie":0, "Ambulance":0, "Other":0}}
 
 #pie chart
-
 def count_calls_region(data):
     if data['region'] not in current_region_calls_count:
         current_region_calls_count[data['region']] = {"Brandweer": 0, "Politie":0, "Ambulance":0, "Other":0}
@@ -83,8 +81,6 @@ def send_email(receiver_email, data):
                 to_addrs=receiver_email,
                 msg=full_message
             )
-            print("Email sent successfully!")
-            print (send_email_user)
             connection.quit()
 
     except Exception as e:
@@ -95,7 +91,6 @@ def send_email(receiver_email, data):
 def form():
     # Extract JSON data from the request
     data = request.json
-    print(data)
     email = data['email'].lower()
     location = data['location'].lower()
     if location not in send_email_user:
@@ -115,16 +110,16 @@ def add_region_data(data):
 
 def extract_priority(data):
     if data['description'][:1] in ['1', '2', '3']:
-        data["priority"] = "p"+data['description'][0]
+        data["priority"] = "high"
         data["description"] = data['description'][1:]
     elif data['description'][:2].lower() in ['a1', 'a2', 'a3']:
-        data["priority"] = "p"+data['description'][1]
+        data["priority"] = "high"
         data["description"] = data['description'][2:]
     elif data['description'][:3].lower() in ['p 1', 'p 2', 'p 3']:
-        data["priority"] = "p"+data['description'][2]
+        data["priority"] = "medium"
         data["description"] = data['description'][3:]
     elif data['description'][:6].lower() in ['prio 1', 'prio 2', 'prio 3']:
-        data["priority"] = "p"+data['description'][5]
+        data["priority"] = "low"
         data["description"] = data['description'][6:]
     else:
         data["priority"] = "non-priority"

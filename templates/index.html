@@ -82,16 +82,14 @@
 								/>
 								<label for="email">Email address</label>
 							</div>
-							<div class="form-floating">
+							<div class="form-floating mb-2">
 								<select
 									class="form-select"
 									id="region"
 									name="location"
 									required
 								>
-									<option selected hidden>
-										Select a region...
-									</option>
+									<option selected hidden>Select a region...</option>
 									<option value="Groningen">Groningen</option>
 									<option value="Noord- en Oost Gelderland">
 										Noord- en Oost Gelderland
@@ -147,13 +145,7 @@
 								</select>
 								<label for="region">Region</label>
 							</div>
-							<div
-								style="
-									display: flex;
-									justify-content: center;
-									margin-top: 5px;
-								"
-							>
+							<div style="display: flex; justify-content: center">
 								<input
 									class="btn btn-secondary"
 									type="submit"
@@ -335,48 +327,50 @@
 									<li>
 										<div
 											class="form-check dropdown-item"
-											id="filter-p1"
+											id="filter-high"
 										>
 											<input
 												class="form-check-input"
 												checked
 												type="checkbox"
-												value="p1"
-												id="p1"
+												value="high"
+												id="high"
 											/>
-											<label class="form-check-label"> p1 </label>
+											<label class="form-check-label"> high </label>
 										</div>
 									</li>
 									<hr />
 									<li>
 										<div
 											class="form-check dropdown-item"
-											id="filter-p2"
+											id="filter-medium"
 										>
 											<input
 												class="form-check-input"
 												checked
 												type="checkbox"
-												value="p2"
-												id="p2"
+												value="medium"
+												id="medium"
 											/>
-											<label class="form-check-label"> p2 </label>
+											<label class="form-check-label">
+												medium
+											</label>
 										</div>
 									</li>
 									<hr />
 									<li>
 										<div
 											class="form-check dropdown-item"
-											id="filter-p3"
+											id="filter-low"
 										>
 											<input
 												class="form-check-input"
 												checked
 												type="checkbox"
-												value="p3"
-												id="p3"
+												value="low"
+												id="low"
 											/>
-											<label class="form-check-label"> p3 </label>
+											<label class="form-check-label"> low </label>
 										</div>
 									</li>
 									<hr />

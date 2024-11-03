@@ -4,12 +4,18 @@ let latestRegionAlert = null;
 const nationwideAlertsElem = document.getElementById("nationwide");
 const regionAlertsElem = document.getElementById("regionwide");
 const alertType = {
-	p1: "alert-danger",
-	p2: "alert-p2",
-	p3: "alert-warning",
+	high: "alert-danger",
+	medium: "alert-p2",
+	low: "alert-warning",
 	"non-priority": "alert-dark",
 };
-const priorities = ["p1", "p2", "p3", "non-priority"];
+const serviceColors = {
+	Brandweer: "186, 78, 0",
+	Politie: "54, 162, 235",
+	Ambulance: "2, 194, 2",
+	Other: "128, 128, 128",
+};
+const priorities = ["high", "medium", "low", "non-priority"];
 const selectedPriorities = new Set(priorities);
 
 var socket = io();
@@ -24,8 +30,21 @@ socket.on("connect", () => {
 
 socket.on("nationwide", (alert) => {
 	const alertItem = document.createElement("div");
-	alertItem.classList.add("alert", alertType[alert["priority"]]);
-	alertItem.innerText = alert["description"];
+	alertItem.classList.add(
+		"flex",
+		"flex-col",
+		"alert",
+		alertType[alert["priority"]]
+	);
+	alertText = document.createElement("div");
+	alertText.innerText = alert["description"];
+	alertItem.appendChild(alertText);
+
+	const badge = document.createElement("div");
+	badge.innerText = alert["service"];
+	badge.classList.add("badge");
+	badge.style.backgroundColor = `rgb(${serviceColors[alert["service"]]})`;
+	alertItem.appendChild(badge);
 	nationwideAlertsElem.insertBefore(alertItem, latestAlert);
 	latestAlert = alertItem;
 });
