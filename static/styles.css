@@ -36,8 +36,17 @@ body {
 	overflow: hidden;
 }
 
+.columns {
+	display: flex;
+	flex: 1;
+	gap: 10px;
+	width: 100%;
+	overflow: hidden;
+}
+
 .content {
 	display: flex;
+	flex-direction: column;
 	flex: 1;
 	gap: 10px;
 	width: 100%;
@@ -56,11 +65,14 @@ body {
 	overflow: hidden;
 }
 
-#nationwide, #regionwide {
+#nationwide,
+#regionwide {
 	overflow: scroll;
 }
 
-h1, h2, h3{
+h1,
+h2,
+h3 {
 	font-weight: bold;
 	text-align: center;
 }
@@ -71,6 +83,23 @@ h2 {
 
 hr {
 	margin: 0px;
+}
+
+.legend {
+	display: flex;
+	justify-content: center;
+}
+
+.legend-box {
+	height: 20px;
+	width: 20px;
+	margin-right: 1px;
+}
+
+.legend-item {
+	display: flex;
+	align-items: center;
+	margin-right: 10px;
 }
 
 .dropdown-item {
@@ -98,25 +127,6 @@ hr {
 	display: flex;
 	gap: 10px;
 	margin-top: 10px;
-}
-
-.pie-chart {
-	display: flex;
-	align-items: center;
-	justify-content: space-around;
-	width: 150px;
-	height: 150px;
-	border-radius: 50%;
-	background: conic-gradient(red 0 33%, blue 33% 66%, green 66% 100%);
-	margin: 20px auto;
-	position: relative;
-}
-
-.slice {
-	position: absolute;
-	color: white;
-	font-weight: bold;
-	font-size: 12px;
 }
 
 .fire {

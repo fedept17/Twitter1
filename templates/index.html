@@ -45,385 +45,385 @@
 		</header>
 
 		<div class="content">
-			<div class="column" id="notifications-chart">
-				<div class="db-item notifications" id="notifications">
-					<h2>Real Time Notifications</h2>
-					<form id="myForm">
-						<div class="form-floating mb-2">
-							<input
-								class="form-control"
-								id="email"
-								placeholder="name@example.com"
-								type="email"
-								name="email"
-								required
-							/>
-							<label for="email">Email address</label>
-						</div>
-						<div class="form-floating">
-							<select
-								class="form-select"
-								id="region"
-								aria-label="Floating label select example"
-								name="location"
-								required
+			<div class="legend">
+				<div class="legend-item">
+					<div class="legend-box" style="background-color: red"></div>
+					<span>High</span>
+				</div>
+				<div class="legend-item">
+					<div class="legend-box" style="background-color: orange"></div>
+					<span>Medium</span>
+				</div>
+				<div class="legend-item">
+					<div
+						class="legend-box"
+						style="background-color: rgb(255, 221, 0)"
+					></div>
+					<span>Low</span>
+				</div>
+				<div class="legend-item">
+					<div class="legend-box" style="background-color: gray"></div>
+					<span>Non-Priority</span>
+				</div>
+			</div>
+			<div class="columns">
+				<div class="column" id="notifications-chart">
+					<div class="db-item notifications" id="notifications">
+						<h2>Real Time Notifications</h2>
+						<form id="myForm">
+							<div class="form-floating mb-2">
+								<input
+									class="form-control"
+									id="email"
+									placeholder="name@example.com"
+									type="email"
+									name="email"
+									required
+								/>
+								<label for="email">Email address</label>
+							</div>
+							<div class="form-floating">
+								<select
+									class="form-select"
+									id="region"
+									name="location"
+									required
+								>
+									<option selected hidden>
+										Select a region...
+									</option>
+									<option value="Groningen">Groningen</option>
+									<option value="Noord- en Oost Gelderland">
+										Noord- en Oost Gelderland
+									</option>
+									<option value="Zaanstreek-Waterland">
+										Zaanstreek-Waterland
+									</option>
+									<option value="Hollands Midden">
+										Hollands Midden
+									</option>
+									<option value="Brabant Noord">Brabant Noord</option>
+									<option value="Friesland">Friesland</option>
+									<option value="Gelderland-Midden">
+										Gelderland-Midden
+									</option>
+									<option value="Kennemerland">Kennemerland</option>
+									<option value="Rotterdam-Rijnmmond">
+										Rotterdam-Rijnmmond
+									</option>
+									<option value="Brabant-Rijnmond">
+										Brabant-Rijnmond
+									</option>
+									<option value="Brabant Zuid-Oost">
+										Brabant Zuid-Oost
+									</option>
+									<option value="Drenthe">Drenthe</option>
+									<option value="Gelderland-Zuid">
+										Gelderland-Zuid
+									</option>
+									<option value="Amsterdam-Amstelland">
+										Amsterdam-Amstelland
+									</option>
+									<option value="Zuid-Holland Zuid">
+										Zuid-Holland Zuid
+									</option>
+									<option value="Limburg Noord">Limburg Noord</option>
+									<option value="IJsselland">IJsselland</option>
+									<option value="Utrecht">Utrecht</option>
+									<option value="Gooi en Vechtstreek">
+										Gooi en Vechtstreek
+									</option>
+									<option value="Zeeland">Zeeland</option>
+									<option value="Limburg Zuid">Limburg Zuid</option>
+									<option value="Twente">Twente</option>
+									<option value="Noord-Holland Noord">
+										Noord-Holland Noord
+									</option>
+									<option value="Haaglanden">Haaglanden</option>
+									<option value="Midden- en West Brabant">
+										Midden- en West Brabant
+									</option>
+									<option value="Flevoland">Flevoland</option>
+								</select>
+								<label for="region">Region</label>
+							</div>
+							<div
+								style="
+									display: flex;
+									justify-content: center;
+									margin-top: 5px;
+								"
 							>
-								<option disabled selected>Select a region...</option>
-								<option value="Groningen">
-									Groningen
-								</option>
-								<option value="Noord- en Oost Gelderland">
-									Noord- en Oost Gelderland
-								</option>
-								<option value="Zaanstreek-Waterland">
-									Zaanstreek-Waterland
-								</option>
-								<option value="Hollands Midden">
-									Hollands Midden
-								</option>
-								<option value="Brabant Noord">
-									Brabant Noord
-								</option>
-								<option value="Friesland">
-									Friesland
-								</option>
-								<option value="Gelderland-Midden">
-									Gelderland-Midden
-								</option>
-								<option value="Kennemerland">
-									Kennemerland
-								</option>
-								<option value="Rotterdam-Rijnmmond">
-									Rotterdam-Rijnmmond
-								</option>
-								<option value="Brabant-Rijnmond">
-									Brabant-Rijnmond
-								</option>
-								<option value="Brabant Zuid-Oost">
-									Brabant Zuid-Oost
-								</option>
-								<option value="Drenthe">
-									Drenthe
-								</option>
-								<option value="Gelderland-Zuid">
-									Gelderland-Zuid
-								</option>
-								<option value="Amsterdam-Amstelland">
-									Amsterdam-Amstelland
-								</option>
-								<option value="Zuid-Holland Zuid">
-									Zuid-Holland Zuid
-								</option>
-								<option value="Limburg Noord">
-									Limburg Noord
-								</option>
-								<option value="IJsselland">
-									IJsselland
-								</option>
-								<option value="Utrecht">
-									Utrecht
-								</option>
-								<option value="Gooi en Vechtstreek">
-									Gooi en Vechtstreek
-								</option>
-								<option value="Zeeland">
-									Zeeland
-								</option>
-								<option value="Limburg Zuid">
-									Limburg Zuid
-								</option>
-								<option value="Twente">
-									Twente
-								</option>
-								<option value="Noord-Holland Noord">
-									Noord-Holland Noord
-								</option>
-								<option value="Haaglanden">
-									Haaglanden
-								</option>
-								<option value="Midden- en West Brabant">
-									Midden- en West Brabant
-								</option>
-								<option value="Flevoland">
-									Flevoland
-								</option>
-							</select>
-							<label for="region">Region</label>
-						</div>
-						<div
+								<input
+									class="btn btn-secondary"
+									type="submit"
+									value="Send Me Notifications"
+								/>
+							</div>
+						</form>
+					</div>
+
+					<div class="db-item" id="chart">
+						<h3>Distribution of Alerts by Emergency Services</h3>
+						<ul
+							class="nav nav-underline"
 							style="
 								display: flex;
 								justify-content: center;
-								margin-top: 13px;
+								margin: 0px 0px 7px 0px;
 							"
 						>
-							<input
-								class="btn btn-secondary"
-								type="submit"
-								value="Send Me Notifications"
-							/>
-						</div>
-					</form>
-				</div>
-
-				<div class="db-item" id="chart">
-					<h3>Distribution of Alerts by Emergency Services</h3>
-					<ul class="nav nav-underline" style="display: flex; justify-content: center; margin: 10px 0px 15px 0px;">
-						<li class="nav-item">
-							<button class="nav-link active" id="piechart-nationwide">Nationwide</button>
-
-						</li>
-						
-						<li class="nav-item">
-							<button class="nav-link disabled" id="piechart-region">No region selected</button>
-						</li>
-					</ul>
-
-					<div
-						style="
-							display: flex;
-							height: 350px;
-							overflow: hidden;
-							justify-content: center;
-						"
-					>
-						<canvas id="myChart"></canvas>
-					</div>
-					<script>
-						let chart = piechart("myChart", {
-							data: {
-								labels: ["Brandweer", "Politie", "Ambulance", "Other"],
-								datasets: [
-									{
-										label: "Number of Calls",
-										data: [0, 0, 0, 0],
-										backgroundColor: [
-											"rgba(255, 99, 132, 0.2)",
-											"rgba(54, 162, 235, 0.2)",
-											"rgba(255, 159, 64, 0.2)",
-											"rgba(128, 128, 128, 0.2)",
-										],
-										borderColor: [
-											"rgba(255, 99, 132, 1)",
-											"rgba(54, 162, 235, 1)",
-											"rgba(255, 159, 64, 1)",
-											"rgba(128, 128, 128, 1)",
-										],
-										borderWidth: 1,
-									},
-								],
-							},
-							options: {
-								responsive: true,
-							},
-						});
-
-						connect_block(chart, "piecharts");
-					</script>
-				</div>
-			</div>
-			<div class="column" id="region-alerts">
-				<div class="db-item">
-					<h2>Region</h2>
-					<div style="display: flex">
-						<div class="form-floating" style="flex: 1">
-							<select
-								class="form-select"
-								id="region-select"
-								aria-label="Floating label select example"
-								required
-							>
-								<option disabled selected>Select a region...</option>
-								<option value="Groningen">
-									Groningen
-								</option>
-								<option value="Noord- en Oost Gelderland">
-									Noord- en Oost Gelderland
-								</option>
-								<option value="Zaanstreek-Waterland">
-									Zaanstreek-Waterland
-								</option>
-								<option value="Hollands Midden">
-									Hollands Midden
-								</option>
-								<option value="Brabant Noord">
-									Brabant Noord
-								</option>
-								<option value="Friesland">
-									Friesland
-								</option>
-								<option value="Gelderland-Midden">
-									Gelderland-Midden
-								</option>
-								<option value="Kennemerland">
-									Kennemerland
-								</option>
-								<option value="Rotterdam-Rijnmmond">
-									Rotterdam-Rijnmmond
-								</option>
-								<option value="Brabant-Rijnmond">
-									Brabant-Rijnmond
-								</option>
-								<option value="Brabant Zuid-Oost">
-									Brabant Zuid-Oost
-								</option>
-								<option value="Drenthe">
-									Drenthe
-								</option>
-								<option value="Gelderland-Zuid">
-									Gelderland-Zuid
-								</option>
-								<option value="Amsterdam-Amstelland">
-									Amsterdam-Amstelland
-								</option>
-								<option value="Zuid-Holland Zuid">
-									Zuid-Holland Zuid
-								</option>
-								<option value="Limburg Noord">
-									Limburg Noord
-								</option>
-								<option value="IJsselland">
-									IJsselland
-								</option>
-								<option value="Utrecht">
-									Utrecht
-								</option>
-								<option value="Gooi en Vechtstreek">
-									Gooi en Vechtstreek
-								</option>
-								<option value="Zeeland">
-									Zeeland
-								</option>
-								<option value="Limburg Zuid">
-									Limburg Zuid
-								</option>
-								<option value="Twente">
-									Twente
-								</option>
-								<option value="Noord-Holland Noord">
-									Noord-Holland Noord
-								</option>
-								<option value="Haaglanden">
-									Haaglanden
-								</option>
-								<option value="Midden- en West Brabant">
-									Midden- en West Brabant
-								</option>
-								<option value="Flevoland">
-									Flevoland
-								</option>
-							</select>
-							<label for="region-select">Region</label>
-						</div>
-						<div class="dropdown" style="margin-left: 10px">
-							<button
-								aria-expanded="false"
-								class="btn btn-light dropdown-toggle"
-								data-bs-auto-close="outside"
-								data-bs-toggle="dropdown"
-								style="
-									height: 100%;
-									width: 100%;
-									background-color: white;
-								"
-								type="button"
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="27"
-									height="27"
-									fill="currentColor"
-									class="bi bi-filter"
-									viewBox="0 0 16 16"
+							<li class="nav-item">
+								<button
+									class="nav-link active"
+									id="piechart-nationwide"
 								>
-									<path
-										d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"
-									/>
-								</svg>
-							</button>
-							<ul class="dropdown-menu">
-								<li>
-									<div class="form-check dropdown-item" id="filter-p1">
-										<input
-											class="form-check-input"
-											checked
-											type="checkbox"
-											value="p1"
-											id="p1"
+									Nationwide
+								</button>
+							</li>
+
+							<li class="nav-item">
+								<button class="nav-link disabled" id="piechart-region">
+									No region selected
+								</button>
+							</li>
+						</ul>
+
+						<div
+							style="
+								display: flex;
+								height: 350px;
+								overflow: hidden;
+								justify-content: center;
+								color: rgb(2, 194, 2);
+							"
+						>
+							<canvas id="myChart"></canvas>
+						</div>
+						<script>
+							let chart = piechart("myChart", {
+								data: {
+									labels: [
+										"Brandweer",
+										"Politie",
+										"Ambulance",
+										"Other",
+									],
+									datasets: [
+										{
+											label: "Number of Calls",
+											data: [0, 0, 0, 0],
+											backgroundColor: [
+												"rgba(186, 78, 0, 0.2)",
+												"rgba(54, 162, 235, 0.2)",
+												"rgba(2, 194, 2, 0.2)",
+												"rgba(128, 128, 128, 0.2)",
+											],
+											borderColor: [
+												"rgba(186, 78, 0, 1)",
+												"rgba(54, 162, 235, 1)",
+												"rgba(2, 194, 2, 1)",
+												"rgba(128, 128, 128, 1)",
+											],
+											borderWidth: 1,
+										},
+									],
+								},
+								options: {
+									responsive: true,
+								},
+							});
+
+							connect_block(chart, "piecharts");
+						</script>
+					</div>
+				</div>
+				<div class="column" id="region-alerts">
+					<div class="db-item">
+						<h2>Region</h2>
+						<div style="display: flex">
+							<div class="form-floating" style="flex: 1">
+								<select
+									class="form-select"
+									id="region-select"
+									aria-label="Floating label select example"
+									required
+								>
+									<option selected hidden>Select a region...</option>
+									<option value="Groningen">Groningen</option>
+									<option value="Noord- en Oost Gelderland">
+										Noord- en Oost Gelderland
+									</option>
+									<option value="Zaanstreek-Waterland">
+										Zaanstreek-Waterland
+									</option>
+									<option value="Hollands Midden">
+										Hollands Midden
+									</option>
+									<option value="Brabant Noord">Brabant Noord</option>
+									<option value="Friesland">Friesland</option>
+									<option value="Gelderland-Midden">
+										Gelderland-Midden
+									</option>
+									<option value="Kennemerland">Kennemerland</option>
+									<option value="Rotterdam-Rijnmmond">
+										Rotterdam-Rijnmmond
+									</option>
+									<option value="Brabant-Rijnmond">
+										Brabant-Rijnmond
+									</option>
+									<option value="Brabant Zuid-Oost">
+										Brabant Zuid-Oost
+									</option>
+									<option value="Drenthe">Drenthe</option>
+									<option value="Gelderland-Zuid">
+										Gelderland-Zuid
+									</option>
+									<option value="Amsterdam-Amstelland">
+										Amsterdam-Amstelland
+									</option>
+									<option value="Zuid-Holland Zuid">
+										Zuid-Holland Zuid
+									</option>
+									<option value="Limburg Noord">Limburg Noord</option>
+									<option value="IJsselland">IJsselland</option>
+									<option value="Utrecht">Utrecht</option>
+									<option value="Gooi en Vechtstreek">
+										Gooi en Vechtstreek
+									</option>
+									<option value="Zeeland">Zeeland</option>
+									<option value="Limburg Zuid">Limburg Zuid</option>
+									<option value="Twente">Twente</option>
+									<option value="Noord-Holland Noord">
+										Noord-Holland Noord
+									</option>
+									<option value="Haaglanden">Haaglanden</option>
+									<option value="Midden- en West Brabant">
+										Midden- en West Brabant
+									</option>
+									<option value="Flevoland">Flevoland</option>
+								</select>
+								<label for="region-select">Region</label>
+							</div>
+							<div class="dropdown" style="margin-left: 10px">
+								<button
+									aria-expanded="false"
+									class="btn btn-light dropdown-toggle"
+									data-bs-auto-close="outside"
+									data-bs-toggle="dropdown"
+									style="
+										height: 100%;
+										width: 100%;
+										background-color: white;
+									"
+									type="button"
+								>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="27"
+										height="27"
+										fill="currentColor"
+										class="bi bi-filter"
+										viewBox="0 0 16 16"
+									>
+										<path
+											d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"
 										/>
-										<label class="form-check-label"> p1 </label>
-									</div>
-								</li>
-								<hr />
-								<li>
-									<div class="form-check dropdown-item" id="filter-p2">
-										<input
-											class="form-check-input"
-											checked
-											type="checkbox"
-											value="p2"
-											id="p2"
-										/>
-										<label class="form-check-label"> p2 </label>
-									</div>
-								</li>
-								<hr />
-								<li>
-									<div class="form-check dropdown-item" id="filter-p3">
-										<input
-											class="form-check-input"
-											checked
-											type="checkbox"
-											value="p3"
-											id="p3"
-										/>
-										<label class="form-check-label"> p3 </label>
-									</div>
-								</li>
-								<hr />
-								<li>
-									<div
-										class="form-check dropdown-item"
-										id="filter-non-priority"
+									</svg>
+								</button>
+								<ul class="dropdown-menu">
+									<li>
+										<div
+											class="form-check dropdown-item"
+											id="filter-p1"
+										>
+											<input
+												class="form-check-input"
+												checked
+												type="checkbox"
+												value="p1"
+												id="p1"
+											/>
+											<label class="form-check-label"> p1 </label>
+										</div>
+									</li>
+									<hr />
+									<li>
+										<div
+											class="form-check dropdown-item"
+											id="filter-p2"
+										>
+											<input
+												class="form-check-input"
+												checked
+												type="checkbox"
+												value="p2"
+												id="p2"
+											/>
+											<label class="form-check-label"> p2 </label>
+										</div>
+									</li>
+									<hr />
+									<li>
+										<div
+											class="form-check dropdown-item"
+											id="filter-p3"
+										>
+											<input
+												class="form-check-input"
+												checked
+												type="checkbox"
+												value="p3"
+												id="p3"
+											/>
+											<label class="form-check-label"> p3 </label>
+										</div>
+									</li>
+									<hr />
+									<li>
+										<div
+											class="form-check dropdown-item"
+											id="filter-non-priority"
+										>
+											<input
+												class="form-check-input"
+												checked
+												type="checkbox"
+												value="non-priority"
+												id="non-priority"
+											/>
+											<label class="form-check-label">
+												non-priority
+											</label>
+										</div>
+									</li>
+									<hr />
+									<li
+										style="
+											display: flex;
+											justify-content: center;
+											padding-top: 10px;
+										"
 									>
 										<input
-											class="form-check-input"
-											checked
-											type="checkbox"
-											value="non-priority"
-											id="non-priority"
+											class="btn btn-secondary"
+											id="apply-filters"
+											style="padding: 1px 5px 0px 5px"
+											type="button"
+											value="Apply Filter(s)"
 										/>
-										<label class="form-check-label">
-											non-priority
-										</label>
-									</div>
-								</li>
-								<hr />
-								<li
-									style="
-										display: flex;
-										justify-content: center;
-										padding-top: 10px;
-									"
-								>
-									<input
-										class="btn btn-secondary"
-										id="apply-filters"
-										style="padding: 1px 5px 0px 5px"
-										type="button"
-										value="Apply Filter(s)"
-									/>
-								</li>
-							</ul>
+									</li>
+								</ul>
+							</div>
 						</div>
+						<div id="regionwide" style="margin-top: 20px"></div>
 					</div>
-					<div id="regionwide" style="margin-top: 20px"></div>
 				</div>
-			</div>
-			<div class="column" id="nationwide-alerts">
-				<div class="db-item">
-					<h2>Nationwide</h2>
-					<div id="nationwide"></div>
+				<div class="column" id="nationwide-alerts">
+					<div class="db-item">
+						<h2>Nationwide</h2>
+						<div id="nationwide"></div>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -129,7 +129,10 @@ def extract_priority(data):
     else:
         data["priority"] = "non-priority"
 
-
+@socket.on("connect")
+def handle_connect():
+    for tweet in tweets:
+        emit("nationwide", tweet)
 
 @socket.on("piechart-type")
 def piechart(type):
