@@ -171,7 +171,7 @@ def tweet_event(context, data):
         add_regional_pie_chart()
 
 generate_data('p2000_incidents.json',
-              time_scale=3,
+              time_scale=10,
               event_name='tweet',
               limit=10000)
 
