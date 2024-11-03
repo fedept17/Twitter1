@@ -1,5 +1,3 @@
-from crypt import methods
-
 import neca
 from neca.generators import print_object, generate_data
 from neca.events import *
