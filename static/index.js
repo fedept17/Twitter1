@@ -36,7 +36,15 @@ socket.on("nationwide", (alert) => {
 		"alert",
 		alertType[alert["priority"]]
 	);
-	alertText = document.createElement("div");
+	let alertTime = document.createElement("b");
+	alertTime.innerText =
+		alert["created_at"].substring(0, 10) +
+		" " +
+		alert["created_at"].substring(26, 31) +
+		" " +
+		alert["created_at"].substring(11, 19);
+	alertItem.appendChild(alertTime);
+	let alertText = document.createElement("div");
 	alertText.innerText = alert["description"];
 	alertItem.appendChild(alertText);
 
@@ -51,8 +59,29 @@ socket.on("nationwide", (alert) => {
 
 socket.on("region", (alert) => {
 	const alertItem = document.createElement("div");
-	alertItem.classList.add("alert", alertType[alert["priority"]]);
-	alertItem.innerText = alert["description"];
+	alertItem.classList.add(
+		"flex",
+		"flex-col",
+		"alert",
+		alertType[alert["priority"]]
+	);
+	let alertTime = document.createElement("b");
+	alertTime.innerText =
+		alert["created_at"].substring(0, 10) +
+		" " +
+		alert["created_at"].substring(26, 31) +
+		" " +
+		alert["created_at"].substring(11, 19);
+	alertItem.appendChild(alertTime);
+	let alertText = document.createElement("div");
+	alertText.innerText = alert["description"];
+	alertItem.appendChild(alertText);
+
+	const badge = document.createElement("div");
+	badge.innerText = alert["service"];
+	badge.classList.add("badge");
+	badge.style.backgroundColor = `rgb(${serviceColors[alert["service"]]})`;
+	alertItem.appendChild(badge);
 	regionAlertsElem.insertBefore(alertItem, latestRegionAlert);
 	latestRegionAlert = alertItem;
 });
@@ -63,8 +92,29 @@ socket.on("filtered_region", (alertList) => {
 	latestRegionAlert = null;
 	alertList.forEach((alert) => {
 		const alertItem = document.createElement("div");
-		alertItem.classList.add("alert", alertType[alert["priority"]]);
-		alertItem.innerText = alert["description"];
+		alertItem.classList.add(
+			"flex",
+			"flex-col",
+			"alert",
+			alertType[alert["priority"]]
+		);
+		let alertTime = document.createElement("b");
+		alertTime.innerText =
+			alert["created_at"].substring(0, 10) +
+			" " +
+			alert["created_at"].substring(26, 31) +
+			" " +
+			alert["created_at"].substring(11, 19);
+		alertItem.appendChild(alertTime);
+		let alertText = document.createElement("div");
+		alertText.innerText = alert["description"];
+		alertItem.appendChild(alertText);
+
+		const badge = document.createElement("div");
+		badge.innerText = alert["service"];
+		badge.classList.add("badge");
+		badge.style.backgroundColor = `rgb(${serviceColors[alert["service"]]})`;
+		alertItem.appendChild(badge);
 		regionAlertsElem.insertBefore(alertItem, latestRegionAlert);
 		latestRegionAlert = alertItem;
 	});
