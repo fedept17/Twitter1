@@ -52,6 +52,8 @@ socket.on("nationwide", (alert) => {
 	badge.innerText = alert["service"];
 	badge.classList.add("badge");
 	badge.style.backgroundColor = `rgb(${serviceColors[alert["service"]]})`;
+	if (!!serviceColors[alert["service"]])
+		badge.style.backgroundColor = serviceColors["Other"];
 	alertItem.appendChild(badge);
 	nationwideAlertsElem.insertBefore(alertItem, latestAlert);
 	latestAlert = alertItem;
@@ -81,6 +83,8 @@ socket.on("region", (alert) => {
 	badge.innerText = alert["service"];
 	badge.classList.add("badge");
 	badge.style.backgroundColor = `rgb(${serviceColors[alert["service"]]})`;
+	if (!!serviceColors[alert["service"]])
+		badge.style.backgroundColor = serviceColors["Other"];
 	alertItem.appendChild(badge);
 	regionAlertsElem.insertBefore(alertItem, latestRegionAlert);
 	latestRegionAlert = alertItem;
@@ -114,6 +118,8 @@ socket.on("filtered_region", (alertList) => {
 		badge.innerText = alert["service"];
 		badge.classList.add("badge");
 		badge.style.backgroundColor = `rgb(${serviceColors[alert["service"]]})`;
+		if (!!serviceColors[alert["service"]])
+			badge.style.backgroundColor = serviceColors["Other"];
 		alertItem.appendChild(badge);
 		regionAlertsElem.insertBefore(alertItem, latestRegionAlert);
 		latestRegionAlert = alertItem;
